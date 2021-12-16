@@ -20,6 +20,10 @@
         .row {
             margin-top: 10px;
         }
+
+        #delete-btn {
+            background-color: red;
+        }
     </style>
 
 <!--[if gte mso 9]><xml>
@@ -77,6 +81,13 @@
     <label for="withdraw-input">Amount:</label>
     <input id="withdraw-input" name="amount" type="number" value="100"/>
     <button type="submit">Withdraw</button>
+</form>
+
+<!-- Delete -->
+<form id="withdraw-form" action="edit.html" th:action="@{/delete(id=${account.id})}" th:method="post">
+    <h1>Delete:</h1>
+
+    <button id="delete-btn" type="submit">Delete</button>
 </form>
 
 </body>
