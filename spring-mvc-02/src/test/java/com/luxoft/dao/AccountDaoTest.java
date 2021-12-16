@@ -1,15 +1,13 @@
 package com.luxoft.dao;
 
 import com.luxoft.domain.model.Account;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest
 public class AccountDaoTest {
     @Autowired
@@ -18,6 +16,7 @@ public class AccountDaoTest {
     @Test
     public void testGet() throws Exception {
         Account account = dao.get(1L);
+        assertEquals(1L, account.getId());
         assertNotNull(account);
         assertEquals(1L, account.getId());
         assertEquals("Mike", account.getHolder());

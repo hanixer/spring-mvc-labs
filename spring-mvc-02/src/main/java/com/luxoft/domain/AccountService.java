@@ -14,5 +14,5 @@ public interface AccountService {
 
     void changeHolder(long accountId, String newHolder);
 
-    void delete (long accountId);
+    void delete(long accountId);
 }
