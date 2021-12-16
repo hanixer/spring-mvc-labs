@@ -61,4 +61,15 @@ public class AccountDTO {
     public static AccountDTO toDto(Account account) {
         return new AccountDTO(account.getId(), account.getHolder(), account.getBalance());
     }
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", holder='" + getHolder() + "'" +
+            ", balance='" + getBalance() + "'" +
+            "}";
+    }
+
 }

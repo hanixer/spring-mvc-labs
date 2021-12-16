@@ -1,0 +1,19 @@
+GET http://localhost:8080/account/1
+
+###
+
+DELETE http://localhost:8080/account/1 HTTP/1.1
+
+###
+
+GET http://localhost:8080/account/2
+
+###
+
+POST http://localhost:8080/account/
+content-type: application/json
+
+{
+ "holder": "John",
+ "balance": 300
+}
