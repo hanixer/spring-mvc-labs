@@ -17,3 +17,15 @@ content-type: application/json
  "holder": "John",
  "balance": 300
 }
+
+###
+
+PUT http://localhost:8080/account/1/deposit?amount=100000
+
+###
+
+PUT http://localhost:8080/account/1/withdraw?amount=100000
+
+###
+
+PUT http://localhost:8080/account/1/holder?name=Broooo
