@@ -1,13 +1,18 @@
 package com.luxoft.rest;
 
 import com.luxoft.domain.AccountService;
+import com.luxoft.domain.NotEnoughFundsException;
+import com.luxoft.domain.model.Account;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-@SuppressWarnings("unused")
 public class FormsController {
 
     private final AccountService accountService;
@@ -23,16 +28,42 @@ public class FormsController {
     @GetMapping("/")
     public String listPage(Model model) {
 
-        // TODO: add code here
+        model.addAttribute("accounts", accountService.getAll());
 
         return "list"; // list.html
     }
 
-    // TODO: add handler to show edit page
+    @GetMapping("/edit")
+    public String edit(long id, Model model) {
+        Account account = accountService.get(id);
+        model.addAttribute("account", account);
+        return "edit";
+    }
 
-    // TODO: add handler to save changes in account
+    @PostMapping("/edit")
+    public String edit(long id, String holder) {
+        accountService.changeHolder(id, holder);
+        return "redirect:edit?id=" + id;
+    }
 
-    // TODO: add deposit handler
+    @PostMapping("/deposit")
+    public String deposit(long id, int amount) {
+        accountService.deposit(id, amount);
+        return "redirect:edit?id=" + id;
+    }
 
-    // TODO: add withdraw handler
+    @PostMapping("/withdraw")
+    public String withdraw(long id, int amount) throws NotEnoughFundsException {
+        accountService.withdraw(id, amount);
+        return "redirect:edit?id=" + id;
+    }
+
+    @ExceptionHandler(NotEnoughFundsException.class)
+    public ResponseEntity<String> handleNotEnoughFunds(NotEnoughFundsException ex) {
+        return ResponseEntity.badRequest().body(
+                "Not enough funds (" + ex.getBalance()
+                        + ") on account " + ex.getId()
+                        + " to withdraw " + ex.getAmount());
+    }
+
 }

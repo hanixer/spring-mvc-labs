@@ -38,12 +38,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>1</td>
-        <td>John Doe</td>
-        <td>2000</td>
+    <tr th:each="account : ${accounts}">
+        <td th:text="${account.id}">1</td>
+        <td th:text="${account.holder}">John Doe</td>
+        <td th:text="${account.balance}">2000</td>
         <td>
-            <a href="edit.html">Edit</a>
+            <a href="edit.html" th:href="@{/edit(id=${account.id})}">Edit</a>
         </td>
     </tr>
     </tbody>

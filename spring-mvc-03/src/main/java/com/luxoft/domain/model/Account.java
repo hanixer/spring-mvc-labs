@@ -46,4 +46,13 @@ public class Account {
         }
         balance -= amount;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", holder='" + getHolder() + "'" +
+            ", balance='" + getBalance() + "'" +
+            "}";
+    }
 }

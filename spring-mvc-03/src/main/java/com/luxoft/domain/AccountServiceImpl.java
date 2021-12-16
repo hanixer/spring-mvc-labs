@@ -4,11 +4,14 @@ import com.luxoft.dao.AccountDao;
 import com.luxoft.domain.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.util.List;
 
 @Service
 public class AccountServiceImpl implements AccountService {
+    Logger logger = LogManager.getLogger(AccountServiceImpl.class);
 
     private final AccountDao dao;
 
@@ -41,6 +44,7 @@ public class AccountServiceImpl implements AccountService {
     public void deposit(long accountId, long amount) {
         Account account = dao.get(accountId);
         account.deposit(amount);
+        logger.info("deposit: " + account.toString());
         dao.update(account);
     }
 
