@@ -36,7 +36,7 @@ public class AccountController {
     }
 
     @PostMapping("/account/")
-    public AccountDTO create(AccountDTO dto) {
+    public AccountDTO create(@RequestBody AccountDTO dto) {
         Account account = AccountDTO.toDomainObject(dto);
         Account accountWithID = service.create(account);
         return AccountDTO.toDto(accountWithID);
